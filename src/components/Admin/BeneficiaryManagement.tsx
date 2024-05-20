@@ -10,7 +10,10 @@ const BeneficiaryManagement: React.FC = () => {
       <Text>Beneficiary Management Component</Text>
       <Text>{name} </Text>
     </View>
+
+    
   );
 };
 
 export default BeneficiaryManagement;
+

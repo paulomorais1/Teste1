@@ -4,12 +4,12 @@ import {
     createStackNavigator,
     StackNavigationOptions,
 } from "@react-navigation/stack";
-// import SignInScreen from "../screens/SignInScreen";
+import SignInScreen from "../screens/SignInScreen";
 import SignUpScreen from '../screens/SignUpScreen';
 import Welcome from "../screens/Welcome";
 import RecoverScreen from '../screens/RecoverPassword';
 
-// import MainNavigator from './MainNavigator';
+import MainNavigator from './MainNavigator';
 import AdminScreen from '../screens/AdminScreen';
 import VolunteerScreen from '../screens/VolunteerScreen';
 import DonationScreen from '../screens/DonorScreen';
@@ -24,27 +24,29 @@ type NavigationOptions = {
 
 const AuthNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName="Welcome">
+        <Stack.Navigator >
+               <Stack.Screen
+               name="AdminScreen"
+               component={AdminScreen}
+               options={{headerShown: false}}
+            />
+             <Stack.Screen
+               name="VolunteerScreen"
+               component={VolunteerScreen}
+               options={{headerShown: false}}
+            />
             <Stack.Screen
                 name="Welcome"
                 component={Welcome}
                 options={{ headerShown: false }}
             />
-            {/* <Stack.Screen
+            <Stack.Screen
                name="SignIn"
                component={SignInScreen}
                options={{title: 'Sign In', headerShown: true}}
-            /> */}
-            <Stack.Screen
-               name="AdminScreen"
-               component={AdminScreen}
-               options={{headerShown: false}}
             />
-            <Stack.Screen
-               name="VolunteerScreen"
-               component={VolunteerScreen}
-               options={{headerShown: false}}
-            />
+      
+        
             <Stack.Screen
                name="DonationScreen"
                component={DonationScreen}
@@ -60,11 +62,11 @@ const AuthNavigator = () => {
                component={RecoverScreen}
                options={{title: 'Recover Password', headerShown: true}}
             />
-            {/* <Stack.Screen
+            <Stack.Screen
                name="Main"
                component={MainNavigator}
                options={{headerShown: false}}
-            /> */}
+            />
         </Stack.Navigator>
     );
 };

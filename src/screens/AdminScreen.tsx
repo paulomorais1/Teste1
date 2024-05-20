@@ -5,6 +5,7 @@ import DonorManagement from '../components/Admin/DonorManagement';
 import ReportsScreen from './ReportsScreen';
 
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import AdminPainel from '../components/Admin/AdminPainel';
 
 const Tab = createBottomTabNavigator();
@@ -31,7 +32,7 @@ const AdminScreen = () => {
             component={BeneficiaryManagement}
             options={{
                tabBarIcon: ({color, size}) => (
-                  <MaterialIcons name="users" size={size} color={color} />
+                  <MaterialIcons name="group-add" size={size} color={color} />
                ),
             }}
          />
@@ -40,7 +41,7 @@ const AdminScreen = () => {
             component={DonorManagement}
             options={{
                tabBarIcon: ({color, size}) => (
-                  <MaterialIcons name="donate" size={size} color={color} />
+                  <FontAwesome5 name="donate" size={size} color={color} />
                ),
             }}
          />
@@ -49,7 +50,7 @@ const AdminScreen = () => {
             component={ReportsScreen}
             options={{
                tabBarIcon: ({color, size}) => (
-                  <MaterialIcons name="cog" size={size} color={color} />
+                  <MaterialIcons name="settings" size={size} color={color} />
                ),
             }}
          />
