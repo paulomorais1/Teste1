@@ -5,14 +5,14 @@ import {
     StackNavigationOptions,
 } from "@react-navigation/stack";
 // import SignInScreen from "../screens/SignInScreen";
-// import SignUpScreen from '../screens/SignUpScreen';
+import SignUpScreen from '../screens/SignUpScreen';
 import Welcome from "../screens/Welcome";
-// import RecoverScreen from '../screens/RecoverPassword';
+import RecoverScreen from '../screens/RecoverPassword';
 
 // import MainNavigator from './MainNavigator';
-// import AdminScreen from '../screens/AdminScreen';
-// import VolunteerScreen from '../screens/VolunteerScreen';
-// import DonationScreen from '../screens/DonorScreen';
+import AdminScreen from '../screens/AdminScreen';
+import VolunteerScreen from '../screens/VolunteerScreen';
+import DonationScreen from '../screens/DonorScreen';
 
 const Stack = createStackNavigator();
 
@@ -34,7 +34,7 @@ const AuthNavigator = () => {
                name="SignIn"
                component={SignInScreen}
                options={{title: 'Sign In', headerShown: true}}
-            />
+            /> */}
             <Stack.Screen
                name="AdminScreen"
                component={AdminScreen}
@@ -60,7 +60,7 @@ const AuthNavigator = () => {
                component={RecoverScreen}
                options={{title: 'Recover Password', headerShown: true}}
             />
-            <Stack.Screen
+            {/* <Stack.Screen
                name="Main"
                component={MainNavigator}
                options={{headerShown: false}}

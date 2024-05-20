@@ -1,3 +1,4 @@
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
@@ -63,9 +64,11 @@ const App: React.FC = () => {
 
     console.log("Rendering AuthNavigator...");
     return (
-        <NavigationContainer>
-            <AuthNavigator />
-        </NavigationContainer>
+        <GestureHandlerRootView>
+            <NavigationContainer>
+                <AuthNavigator />
+            </NavigationContainer>
+        </GestureHandlerRootView>
     );
 };
 
