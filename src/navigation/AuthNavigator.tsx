@@ -25,6 +25,11 @@ type NavigationOptions = {
 const AuthNavigator = () => {
     return (
         <Stack.Navigator >
+            <Stack.Screen
+               name="SignIn"
+               component={SignInScreen}
+               options={{title: 'Sign In', headerShown: false}}
+            />
                <Stack.Screen
                name="AdminScreen"
                component={AdminScreen}
@@ -39,14 +44,7 @@ const AuthNavigator = () => {
                 name="Welcome"
                 component={Welcome}
                 options={{ headerShown: false }}
-            />
-            <Stack.Screen
-               name="SignIn"
-               component={SignInScreen}
-               options={{title: 'Sign In', headerShown: true}}
-            />
-      
-        
+            />        
             <Stack.Screen
                name="DonationScreen"
                component={DonationScreen}

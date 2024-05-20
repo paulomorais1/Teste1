@@ -1,20 +1,10 @@
-
 import React, { useState } from "react";
-import {
-    View,
-    Text,
-    TextInput,
-    StyleSheet,
-    Platform,
-    KeyboardAvoidingView,
-    ScrollView,
-    Image,
-    TouchableOpacity,
-    Alert,
-} from "react-native";
+import { View, Text, TextInput, StyleSheet, Platform, KeyboardAvoidingView, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AuthenticationService from "@/services/AuthenticationService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import PhoneNumberInput from "@/components/Input/PhoneNumberInput";
+import PasswordInput from "@/components/Input/PasswordInput";
 
 const SignInScreen = () => {
     const [phone, setPhone] = useState("");
@@ -81,20 +71,12 @@ const SignInScreen = () => {
                     </View>
                     <View style={styles.signInContainer}>
                         <Text style={styles.title}>Faça o login!</Text>
-                        <TextInput
-                            style={styles.input}
-                            keyboardType="phone-pad"
-                            placeholder="Phone"
-                            value={phone}
-                            onChangeText={setPhone}
-                        />
-                        <TextInput
-                            style={styles.input}
-                            placeholder="Senha"
-                            secureTextEntry
-                            value={password}
-                            onChangeText={setPassword}
-                        />
+                
+                        <View style={styles.phoneNumberInputContainer}>
+                            <PhoneNumberInput value={phone} onChangeText={setPhone} />
+                            <PasswordInput value={password} onChangeText={setPassword} />
+                        </View>
+                       
                         <Text
                             style={styles.link}
                             onPress={() =>
@@ -124,7 +106,6 @@ const SignInScreen = () => {
         </KeyboardAvoidingView>
     );
 };
-
 const styles = StyleSheet.create({
     scrollContainer: {
         flexGrow: 1,
@@ -181,12 +162,16 @@ const styles = StyleSheet.create({
     link: {
         color: "blue",
         alignSelf: "flex-end",
-        marginBottom: 10,
+        padding:12
     },
     signUpText: {
         marginTop: 20,
         alignSelf: "center",
     },
+    // Adicione o estilo para o container do PhoneNumberInput
+    phoneNumberInputContainer: {
+        gap: 20,
+    },
+    
 });
-
 export default SignInScreen;

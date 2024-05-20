@@ -1,13 +1,12 @@
-import React, {useState} from 'react';
-import {
-   View,
-   Text,
-   TextInput,
-   TouchableOpacity,
-   StyleSheet,
-} from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
+import NomeInput from '@/components/Input/NomeInput';
+import EmailInput from '@/components/Input/EmailInput';
+import PhoneNumberInput from '@/components/Input/PhoneNumberInput';
+import PasswordInput from '@/components/Input/PasswordInput';
+import EnderecoInput from '@/components/Input/EndenrecoInput';
 
-const SignUpScreen: React.FC = () => {
+const SignUpScreen = () => {
    const [message, setMessage] = useState('');
    const [formData, setFormData] = useState({
       name: '',
@@ -18,72 +17,36 @@ const SignUpScreen: React.FC = () => {
    });
 
    const handleSignUp = async () => {
-      try {
-         console.log('Enviando solicitação de cadastro...', formData);
-
-         const requestOptions: RequestInit = {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(formData),
-         };
-
-         const response = await fetch(
-            'http://localhost:8080/api/v1/auth/user/create',
-            requestOptions,
-         );
-
-         if (!response.ok) {
-            throw new Error(
-               'Erro ao cadastrar usuário. Status: ' + response.status,
-            );
-         }
-
-         const data = await response.json();
-         console.log('Resposta da solicitação de cadastro:', data);
-
-         setMessage(`Obrigado por se tornar um doador, ${formData.name}!`);
-      } catch (error:any) {
-         console.error('Erro ao cadastrar usuário:', error.message);
-         setMessage(
-            'Ocorreu um erro ao cadastrar usuário. Por favor, tente novamente.',
-         );
-      }
+      // Implemente o restante da lógica de cadastro aqui
    };
 
    return (
+      <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={styles.container}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+  >
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
       <View style={styles.container}>
          <Text style={styles.title}>Seja um Doador de Alimentos</Text>
-         <TextInput
-            style={styles.input}
-            placeholder="Nome"
+         <NomeInput
             value={formData.name}
             onChangeText={name => setFormData({...formData, name})}
          />
-         <TextInput
-            style={styles.input}
-            placeholder="Email"
+         <EmailInput
             value={formData.email}
             onChangeText={email => setFormData({...formData, email})}
-            keyboardType="email-address"
          />
-         <TextInput
-            style={styles.input}
-            placeholder="Senha"
-            secureTextEntry={true}
+         <PasswordInput
             value={formData.password}
             onChangeText={password => setFormData({...formData, password})}
          />
-         <TextInput
-            style={styles.input}
-            placeholder="Endereço"
+         <EnderecoInput
             value={formData.address}
             onChangeText={address => setFormData({...formData, address})}
          />
-         <TextInput
-            style={styles.input}
-            placeholder="Telefone"
+         <PhoneNumberInput
             value={formData.phone}
-            keyboardType="phone-pad"
             onChangeText={phone => setFormData({...formData, phone})}
          />
          <View style={styles.buttonContainer}>
@@ -93,17 +56,22 @@ const SignUpScreen: React.FC = () => {
             <Text style={styles.message}>{message}</Text>
          </View>
       </View>
+      </ScrollView>
+        </KeyboardAvoidingView>
    );
 };
 
 const styles = StyleSheet.create({
+   scrollContainer: {
+      flexGrow: 1,
+  },
    container: {
       flex: 1,
       justifyContent: 'flex-start',
       alignItems: 'center',
       paddingHorizontal: 20,
       backgroundColor: '#FFF',
-      paddingTop: 20,
+      gap:20
    },
    title: {
       fontSize: 24,

@@ -58,6 +58,7 @@ const styles = StyleSheet.create({
     height: '80%',
     width: '100%',
     gap: 10,
+   
   },
   tituloForgot: {
     paddingTop: 10,
@@ -91,6 +92,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
+    
   },
   buttonText: {
     color: 'white',
