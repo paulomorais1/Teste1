@@ -1,5 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, TextInput, StyleSheet, Platform, KeyboardAvoidingView, ScrollView, Image, TouchableOpacity, Alert } from "react-native";
+import {
+    View,
+    Text,
+    TextInput,
+    StyleSheet,
+    Platform,
+    KeyboardAvoidingView,
+    ScrollView,
+    Image,
+    TouchableOpacity,
+    Alert,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AuthenticationService from "@/services/AuthenticationService";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -12,6 +23,7 @@ const SignInScreen = () => {
     const navigation = useNavigation();
 
     const handleSignIn = async () => {
+
         if (!phone || !password) {
             Alert.alert("Erro", "Por favor, preencha todos os campos");
             return;
@@ -23,21 +35,17 @@ const SignInScreen = () => {
                 password
             );
 
+
             if (user) {
                 await AsyncStorage.setItem("userRole", user.role);
 
-                switch (user.role) {
-                    case "Admin":
-                        navigation.navigate("AdminScreen");
-                        break;
-                    case "Volunteer":
-                        navigation.navigate("VolunteerScreen");
-                        break;
-                    case "Donation":
-                        navigation.navigate("DonationScreen");
-                        break;
-                    default:
-                        navigation.navigate("DefaultScreen");
+                // Utilize o papel (role) do usuário retornado para decidir qual tela exibir
+                if (user.role === "Admin") {
+                    navigation.navigate("AdminScreen");
+                } else if (user.role === "Volunteer") {
+                    navigation.navigate("VolunteerScreen");
+                } else {
+                    navigation.navigate("DonationScreen");
                 }
             } else {
                 Alert.alert(
@@ -64,19 +72,25 @@ const SignInScreen = () => {
                 <View style={styles.innerContainer}>
                     <View style={styles.logoContainer}>
                         <Image
-                            source={require("../../assets/logo.png")}
+                            source={require("../../src/assets/logo.png")}
                             style={styles.logo}
                             resizeMode="contain"
                         />
                     </View>
                     <View style={styles.signInContainer}>
                         <Text style={styles.title}>Faça o login!</Text>
-                
+
                         <View style={styles.phoneNumberInputContainer}>
-                            <PhoneNumberInput value={phone} onChangeText={setPhone} />
-                            <PasswordInput value={password} onChangeText={setPassword} />
+                            <PhoneNumberInput
+                                value={phone}
+                                onChangeText={setPhone}
+                            />
+                            <PasswordInput
+                                value={password}
+                                onChangeText={setPassword}
+                            />
                         </View>
-                       
+
                         <Text
                             style={styles.link}
                             onPress={() =>
@@ -106,6 +120,7 @@ const SignInScreen = () => {
         </KeyboardAvoidingView>
     );
 };
+
 const styles = StyleSheet.create({
     scrollContainer: {
         flexGrow: 1,
@@ -162,7 +177,7 @@ const styles = StyleSheet.create({
     link: {
         color: "blue",
         alignSelf: "flex-end",
-        padding:12
+        padding: 12,
     },
     signUpText: {
         marginTop: 20,
@@ -172,6 +187,6 @@ const styles = StyleSheet.create({
     phoneNumberInputContainer: {
         gap: 20,
     },
-    
 });
+
 export default SignInScreen;

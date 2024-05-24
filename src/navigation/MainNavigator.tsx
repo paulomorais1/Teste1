@@ -5,12 +5,13 @@ import { createStackNavigator } from "@react-navigation/stack";
 import OverviewScreen from "../screens/OverviewScreen";
 import AdminScreen from "../screens/AdminScreen";
 import BeneficiariesScreen from "../screens/BeneficiariesScreen";
-import ReportsScreen from "../screens/ReportsScreen";
+
 import NotificationsScreen from "../screens/NotificationsScreen";
 import FeedbackScreen from "../screens/FeedbackScreen";
 
 import VolunteerScreen from "../screens/VolunteerScreen";
 import DonationScreen from "../screens/DonorScreen";
+import PerfilScreen from "@/screens/PerfilScreen";
 
 const Stack = createStackNavigator();
 
@@ -25,7 +26,7 @@ const MainNavigator: React.FC = () => {
                 name="Beneficiaries"
                 component={BeneficiariesScreen}
             />
-            <Stack.Screen name="Reports" component={ReportsScreen} />
+
             <Stack.Screen
                 name="Notifications"
                 component={NotificationsScreen}
