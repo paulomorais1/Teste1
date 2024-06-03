@@ -1,15 +1,19 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import {
   View,
   Text,
   TextInput,
   TouchableOpacity,
   StyleSheet,
+  KeyboardAvoidingView,
+  Platform,
+  ScrollView,
 } from 'react-native';
 
 const RecoverScreen: React.FC = () => {
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   const handleRecoverPassword = () => {
     // Implementar lógica para enviar solicitação de recuperação de senha
@@ -17,48 +21,74 @@ const RecoverScreen: React.FC = () => {
     setMessage(`Um email de recuperação foi enviado para ${email}`);
   };
 
+  const validateEmail = () => {
+    // Expressão regular para validar o email
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError('Por favor, insira um email válido.');
+      return false;
+    }
+    setError('');
+    return true;
+  };
+
+  const handleSubmit = () => {
+    if (validateEmail()) {
+      handleRecoverPassword();
+    }
+  };
+
   return (
-    <View style={styles.container}>
-      <View style={styles.containerTitle}>
-        <Text style={styles.tituloForgot}>Redefinir sua senha</Text>
-        <Text style={styles.textForgot}>
-          Digite seu e-mail, enviaremos um código de verificação para o seu
-          e-mail
-        </Text>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : null}
+      style={styles.container}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 50 : 0}
+    >
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
+        <View style={styles.containerTitle}>
+          <Text style={styles.tituloForgot}>Redefinir sua senha</Text>
+          <Text style={styles.textForgot}>
+            Digite seu e-mail, enviaremos um código de verificação para o seu
+            e-mail
+          </Text>
 
-        <TextInput
-          style={styles.input}
-          placeholder="Email"
-          value={email}
-          onChangeText={setEmail}
-          keyboardType="email-address"
-        />
-      </View>
+          <TextInput
+            style={styles.input}
+            placeholder="Email"
+            value={email}
+            onChangeText={setEmail}
+            keyboardType="email-address"
+          />
+          {error ? <Text style={styles.error}>{error}</Text> : null}
+        </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={styles.button} onPress={handleRecoverPassword}>
-          <Text style={styles.buttonText}>Recuperar Senha</Text>
-        </TouchableOpacity>
-      </View>
-      <Text style={styles.message}>{message}</Text>
-    </View>
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+            <Text style={styles.buttonText}>Recuperar Senha</Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={styles.message}>{message}</Text>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'flex-start', // Alinha os elementos no início verticalmente
+    justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#FFF',
     paddingHorizontal: 20,
     paddingTop: 20,
   },
+  scrollContainer: {
+    flexGrow: 1,
+  },
   containerTitle: {
     height: '80%',
     width: '100%',
     gap: 10,
-   
   },
   tituloForgot: {
     paddingTop: 10,
@@ -81,9 +111,9 @@ const styles = StyleSheet.create({
   },
   buttonContainer: {
     flex: 1,
-    justifyContent: 'flex-end', // Alinha o botão no final da tela
+    justifyContent: 'flex-end',
     width: '100%',
-    marginBottom: 20, // Adiciona margem inferior ao container do botão
+    marginBottom: 20,
   },
   button: {
     width: '100%',
@@ -92,7 +122,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
-    
   },
   buttonText: {
     color: 'white',
@@ -103,6 +132,10 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 16,
     color: 'green',
+  },
+  error: {
+    marginTop: 5,
+    color: 'red',
   },
 });
 

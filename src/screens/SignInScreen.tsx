@@ -9,7 +9,7 @@ import {
     ScrollView,
     Image,
     TouchableOpacity,
-    Alert,
+    ToastAndroid,
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import AuthenticationService from "@/services/AuthenticationService";
@@ -22,10 +22,14 @@ const SignInScreen = () => {
     const [password, setPassword] = useState("");
     const navigation = useNavigation();
 
+    const showToast = (message) => {
+        ToastAndroid.show(message, ToastAndroid.SHORT);
+    };
+
     const handleSignIn = async () => {
 
         if (!phone || !password) {
-            Alert.alert("Erro", "Por favor, preencha todos os campos");
+            showToast("Por favor, preencha todos os campos");
             return;
         }
 
@@ -48,17 +52,11 @@ const SignInScreen = () => {
                     navigation.navigate("DonationScreen");
                 }
             } else {
-                Alert.alert(
-                    "Erro",
-                    "Credenciais incorretas. Por favor, tente novamente."
-                );
+                showToast("Credenciais incorretas. Por favor, tente novamente.");
             }
         } catch (error) {
             console.error("Erro ao fazer login:", error);
-            Alert.alert(
-                "Erro",
-                "Ocorreu um erro ao fazer login. Por favor, tente novamente."
-            );
+            showToast("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
         }
     };
 
