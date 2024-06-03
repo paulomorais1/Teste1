@@ -32,6 +32,7 @@ const MainNavigator: React.FC = () => {
                 component={NotificationsScreen}
             />
             <Stack.Screen name="Feedback" component={FeedbackScreen} />
+            <Stack.Screen name="PerfilScreen" component={PerfilScreen} />
         </Stack.Navigator>
     );
 };

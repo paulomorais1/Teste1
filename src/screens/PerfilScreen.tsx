@@ -1,70 +1,86 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, StatusBar } from "react-native";
 import Avatar from "./Perfil/Avatar";
+import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { useNavigation } from "@react-navigation/native";
 
 const ProfileScreen = () => {
+    const navigation = useNavigation();
+    const handleLogout = async () => {
+        navigation.navigate("SignIn");
+     };
+  
     return (
-        <View style={styles.container}>
-            <View style={styles.profileHeader}>
-                <Avatar />
+        <KeyboardAvoidingView
+            behavior={Platform.OS === "ios" ? "padding" : "height"}
+            style={styles.container}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 249 : 0} // Ajuste conforme a altura do cabeçalho
+        >
+            <View >
+                <ScrollView contentContainerStyle={styles.scrollContainer}>
+                    <View style={styles.profileHeader}>
+                        <Avatar />
+                    </View>
+                    <View style={styles.profileMenu}>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <AntDesign name="idcard" size={24} color="black" />
+                            <Text style={styles.menuItemText}>Personal Information</Text>
+                            <AntDesign name="right" size={24} color="black" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <MaterialIcons name="security" size={24} color="black" />
+                            <Text style={styles.menuItemText}>Privacy & Security</Text>
+                            <AntDesign name="right" size={24} color="black" />
+                        </TouchableOpacity>
+                        <TouchableOpacity style={styles.menuItem}>
+                            <MaterialIcons name="support-agent" size={24} color="black" />
+                            <Text style={styles.menuItemText}>Support</Text>
+                            <AntDesign name="right" size={24} color="black" />
+                        </TouchableOpacity>
+                    </View>
+                    <TouchableOpacity style={styles.logoutButton}
+                       onPress={handleLogout}>
+                        <MaterialCommunityIcons name="logout" size={24} color="white" />
+                        <Text style={styles.logoutButtonText}>Logout</Text>
+                        
+                    </TouchableOpacity>
+                </ScrollView>
             </View>
-            <TouchableOpacity style={styles.menuItem}>
-                <Text style={styles.menuItemText}>Personal Information</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-                <Text style={styles.menuItemText}>Cards management</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-                <Text style={styles.menuItemText}>Privacy & Security</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-                <Text style={styles.menuItemText}>Support</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem}>
-                <Text style={styles.menuItemText}>Referral code</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.logoutButton}>
-                <Text style={styles.logoutButtonText}>Log out</Text>
-            </TouchableOpacity>
-        </View>
+        </KeyboardAvoidingView>
     );
 };
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        alignItems: "center",
-        justifyContent: "center",
-        padding: 20,
         backgroundColor: "#f9f9f9",
     },
+    scrollContainer: {
+        flexGrow: 1,
+        justifyContent: "center",
+        alignItems: "center",
+    },
     profileHeader: {
-        position: "absolute",
-        top: 0,
-        left: 0,
-        width: 390,
-        height: 269,
+        width: '100%',
+        height: 249,
         backgroundColor: "#E0F2DF", // primary-100
         borderRadius: 0,
         alignItems: "center",
-        marginBottom: 20,
     },
-
-    profileName: {
-        fontSize: 24,
-        fontWeight: "bold",
-        color: "#333",
-    },
-    profilePhone: {
-        fontSize: 18,
-        color: "#666",
-        marginTop: 10,
+    profileMenu: {
+        marginTop: 20,
+        width: '85%',
+        gap: 20,
     },
     menuItem: {
-        marginTop: 20,
-        padding: 15,
-        borderBottomWidth: 1,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
         borderBottomColor: "#ddd",
+        borderBottomWidth: 1,
     },
     menuItemText: {
         fontSize: 16,
@@ -72,11 +88,15 @@ const styles = StyleSheet.create({
     },
     logoutButton: {
         marginTop: 20,
-        padding: 15,
-        backgroundColor: "#ff0000",
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: "#325426",
+        paddingHorizontal: 20,
+        paddingVertical: 15,
         borderRadius: 5,
     },
     logoutButtonText: {
+        marginLeft: 10,
         fontSize: 16,
         color: "#fff",
     },

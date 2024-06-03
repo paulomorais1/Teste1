@@ -1,25 +1,31 @@
 import React from "react";
-import { View, Image, Text, StyleSheet } from "react-native";
-import AvatarImg from "./J1.jpg";
+import { View, Image, StyleSheet } from "react-native";
+
 const Avatar = () => {
+    console.log("Avatar component is being rendered");
+
     return (
-        <View style={[styles.avatar, { borderColor: "#000000FF" }]}>
-            <Image
-                source={require("../../assets/J1.jpg")}
-                style={styles.avatarImage}
-                onError={(e) =>
-                    console.log("Image Load Error: ", e.nativeEvent.error)
-                }
-            />
+        <View style={styles.container}>
+            <View style={styles.avatar}>
+                <Image
+                    source={require("../../assets/images/avatar.png")} // Verifique o caminho aqui
+                    style={styles.avatarImage}
+                    onError={(e) => {
+                        console.log("Image Load Error: ", e.nativeEvent.error);
+                    }}
+                />
+            </View>
         </View>
     );
 };
 
 const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
     avatar: {
-        position: "absolute",
-        top: 96,
-        left: 154,
         width: 82,
         height: 82,
         backgroundColor: "#D9CBF6FF",
@@ -27,6 +33,9 @@ const styles = StyleSheet.create({
         borderRadius: 41,
         borderWidth: 1.5,
         borderColor: "#000000FF",
+       
+        justifyContent: 'center', // Centraliza a imagem dentro do avatar
+        alignItems: 'center',
     },
     avatarImage: {
         width: 82,

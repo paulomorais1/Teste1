@@ -7,6 +7,8 @@ type WelcomeProps = {
 };
 
 const Welcome: React.FC<WelcomeProps> = ({ navigation }) => {
+    const logo = require('@/assets/images/logo.png');
+
     const handleSignInPress = () => {
         navigation.navigate("SignIn");
     };
@@ -19,7 +21,7 @@ const Welcome: React.FC<WelcomeProps> = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.containerLogo}>
                 <Image
-                    source={require("../assets/logo.png")}
+                    source={logo}
                     style={[styles.logoImage]}
                     resizeMode="contain"
                 />
@@ -66,6 +68,9 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200,
         resizeMode: "contain",
+        borderWidth:1,
+        backgroundColor:'red', 
+        flex: 1
     },
     containerTitle: {
         marginVertical: 15,

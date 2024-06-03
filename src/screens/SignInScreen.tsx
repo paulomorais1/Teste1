@@ -72,7 +72,7 @@ const SignInScreen = () => {
                 <View style={styles.innerContainer}>
                     <View style={styles.logoContainer}>
                         <Image
-                            source={require("../../src/assets/logo.png")}
+                            source={require("./logo.png")}
                             style={styles.logo}
                             resizeMode="contain"
                         />
@@ -150,15 +150,7 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         marginBottom: 10,
     },
-    input: {
-        height: 60,
-        borderColor: "gray",
-        borderWidth: 1,
-        borderRadius: 5,
-        paddingHorizontal: 20,
-        marginBottom: 10,
-        fontSize: 20,
-    },
+  
     button: {
         justifyContent: "center",
         alignItems: "center",
