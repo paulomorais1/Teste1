@@ -23,7 +23,6 @@ const SignInScreen = () => {
     const navigation = useNavigation();
 
     const handleSignIn = async () => {
-
         if (!phone || !password) {
             Alert.alert("Erro", "Por favor, preencha todos os campos");
             return;
@@ -34,7 +33,6 @@ const SignInScreen = () => {
                 phone as unknown as number,
                 password
             );
-
 
             if (user) {
                 await AsyncStorage.setItem("userRole", user.role);
@@ -72,9 +70,10 @@ const SignInScreen = () => {
                 <View style={styles.innerContainer}>
                     <View style={styles.logoContainer}>
                         <Image
-                            source={require("../../src/assets/logo.png")}
+                            source={{
+                                uri: "https://raw.githubusercontent.com/paulomorais1/Teste1/Teste/src/assets/images/logo.png",
+                            }}
                             style={styles.logo}
-                            resizeMode="contain"
                         />
                     </View>
                     <View style={styles.signInContainer}>
@@ -136,6 +135,7 @@ const styles = StyleSheet.create({
     logoContainer: {
         alignItems: "center",
         justifyContent: "center",
+        paddingVertical:30
     },
     logo: {
         width: "50%",

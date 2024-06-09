@@ -19,7 +19,9 @@ const Welcome: React.FC<WelcomeProps> = ({ navigation }) => {
         <View style={styles.container}>
             <View style={styles.containerLogo}>
                 <Image
-                    source={require("../assets/logo.png")}
+                    source={{
+                        uri: "https://raw.githubusercontent.com/paulomorais1/Teste1/Teste/src/assets/images/logo.png",
+                    }}
                     style={[styles.logoImage]}
                     resizeMode="contain"
                 />

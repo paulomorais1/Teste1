@@ -22,8 +22,7 @@ type NavigationOptions = {
 
 const AuthNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName="PerfilScreen">
-
+        <Stack.Navigator initialRouteName="Welcome">
             <Stack.Screen
                 name="PerfilScreen"
                 component={PerfilScreen}
