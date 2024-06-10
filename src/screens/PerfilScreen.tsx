@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
     View,
     Text,
@@ -7,34 +7,121 @@ import {
     ScrollView,
     KeyboardAvoidingView,
     Platform,
-    StatusBar,
+    ActivityIndicator,
 } from "react-native";
 import Avatar from "./Perfil/Avatar";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import GetUserService from "@/services/GetUserById";
+import User from "@/models/User";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
 
 
 
 const ProfileScreen: React.FC = () => {
-    const navigation = useNavigation();
+    const [loading, setLoading] = useState<boolean>(true);
+    const [error, setError] = useState<string | null>(null);
+    const [userDataLoaded, setUserDataLoaded] = useState<boolean>(false);
+    const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
 
     const handleLogout = async () => {
-        navigation.navigate("SignIn");
+        // Aqui você pode adicionar a lógica para logout
     };
 
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const userId = await AsyncStorage.getItem("userId");
+
+                if (!userId) {
+                    setError("ID do usuário não encontrado no AsyncStorage.");
+                    setLoading(false);
+                    return;
+                }
+
+                const userData = await GetUserService.getUserById(userId);
+                console.log("User Data:", userData);
+
+                if (typeof userData === "string") {
+                    setError(userData); // Define o erro com a mensagem retornada
+                    setLoading(false);
+                    return;
+                }
+
+                setLoggedInUser(userData);
+                setUserDataLoaded(true); // Define que os dados do usuário foram carregados com sucesso
+                setLoading(false);
+            } catch (error) {
+                console.error("Erro ao recuperar dados do usuário:", error);
+                setError("Erro ao recuperar dados do usuário.");
+                setLoading(false);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    useEffect(() => {
+        console.log("userDataLoaded:", userDataLoaded); // Adiciona um log para verificar o valor de userDataLoaded
+        if (loggedInUser) {
+            console.log("Dados do usuário atualizados:", loggedInUser);
+        }
+    }, [loggedInUser, userDataLoaded]);
 
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 249 : 0} // Ajuste conforme a altura do cabeçalho
+            keyboardVerticalOffset={Platform.OS === "ios" ? 249 : 0}
         >
             <View>
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.profileHeader}>
                         <Avatar />
+                        {loading ? (
+                        <ActivityIndicator size="large" color="#0000ff" />
+                    ) : error ? (
+                        <View>
+                            <Text>{error}</Text>
+                        </View>
+                    ) : userDataLoaded ? ( // Verifica se os dados do usuário foram carregados com sucesso
+                        <View style={styles.profileInfo}>
+                            {loggedInUser && loggedInUser && (
+                                <View style={styles.profileInfo}>
+                                    {loggedInUser.body.name && (
+                                        <Text
+                                            style={[
+                                                styles.profileInfoText,
+                                                { marginHorizontal: 10 },
+                                            ]}
+                                        >
+                                            {loggedInUser.body.name}{" "}
+                                            {loggedInUser.body.surname}
+                                        </Text>
+                                    )}
+
+                                    {loggedInUser.body.phone && (
+                                        <Text style={styles.profileInfoText}>
+                                            {loggedInUser.body.phone}
+                                        </Text>
+                                    )}
+                                </View>
+                            )}
+
+                            {!loggedInUser ||
+                                (!loggedInUser.body.name &&
+                                    !loggedInUser.body.phone &&
+                                    !loggedInUser.body.surname && (
+                                        <Text>
+                                            Dados do usuário não encontrados
+                                        </Text>
+                                    ))}
+                        </View>
+                    ) : (
+                        <Text>Carregando dados do usuário...</Text>
+                    )}
                     </View>
+
                     <View style={styles.profileMenu}>
                         <TouchableOpacity style={styles.menuItem}>
                             <AntDesign name="idcard" size={24} color="black" />
@@ -93,10 +180,19 @@ const styles = StyleSheet.create({
     },
     profileHeader: {
         width: "100%",
-        height: 249,
-        backgroundColor: "#E0F2DF", // primary-100
+        height: 229,
+        backgroundColor: "#E0F2DF",
         borderRadius: 0,
         alignItems: "center",
+    },
+    profileInfo: {
+        textAlign: "center",
+
+        paddingHorizontal: 20,
+    },
+    profileInfoText: {
+        fontSize: 16,
+        marginBottom: 10,
     },
     profileMenu: {
         marginTop: 20,

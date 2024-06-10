@@ -1,16 +1,19 @@
 import { IAddress } from "./address";
 import { TRole } from "./role";
-
-interface User {
+interface UserBody {
+    id: number;
     name: string;
     surname: string;
-    phone: number;
+    phone: string; // ou number, dependendo do tipo real dos dados
     password: string;
     role: TRole;
     email?: string;
-    sector?: string;
     address?: IAddress;
-    isInterviewer?: boolean;
 }
+
+interface User {
+    body: UserBody;
+}
+
 
 export default User;

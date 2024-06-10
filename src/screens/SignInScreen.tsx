@@ -23,6 +23,7 @@ const SignInScreen = () => {
 
     const navigation = useNavigation();
 
+
     const showToast = (message) => {
         ToastAndroid.show(message, ToastAndroid.SHORT);
     };
@@ -34,11 +35,9 @@ const SignInScreen = () => {
         }
 
         const result = await AuthenticationService.login(
-            phone as unknown as number,
+            phone ,
             password
         );
-
-
 
         if (typeof result === "string") {
             // Exibir mensagem de erro como toast
@@ -47,14 +46,12 @@ const SignInScreen = () => {
         } else {
             const user = result;
             setTimeout(() => {
-                showToast(`Logado com sucesso!`);
+                showToast(`Bem vindo(a), ${user.name}`);
             }, 100);
-            setTimeout(() => {
-                showToast(` Bem-vindo, ${user.name} `);
-            }, 2000);
 
             await AsyncStorage.setItem("userRole", user.role);
-            if (user.role === "Admin") {
+
+            if ( user.role === "Admin") {
                 navigation.navigate("AdminScreen");
             } else if (user.role === "Volunteer") {
                 navigation.navigate("VolunteerScreen");
@@ -88,7 +85,7 @@ const SignInScreen = () => {
                             <PhoneNumberInput
                                 value={phone}
                                 onChangeText={setPhone}
-                                
+
                             />
                             <PasswordInput
                                 value={password}

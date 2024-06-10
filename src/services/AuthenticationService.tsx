@@ -1,19 +1,18 @@
-
-
 import User from "@/models/User";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ToastAndroid } from "react-native";
 
 interface SignInResponse {
-    body: User;
+    body: User['body'];
     message: string;
-
 }
 
 const AuthenticationService = {
-    login: async (phone: number, password: string): Promise<User | string> => {
-        const showToast = (message ) => {
+    login: async (phone: string, password: string): Promise<User['body'] | string> => { // Ajuste aqui para retornar User['body'] | string
+        const showToast = (message: string) => {
             ToastAndroid.show(message, ToastAndroid.SHORT);
         };
+
         try {
             const requestOptions: RequestInit = {
                 method: "POST",
@@ -27,27 +26,22 @@ const AuthenticationService = {
             );
 
             if (!response.ok) {
-                // Exibir toast de erro
                 showToast("Usuário ou senha incorretos");
                 return `Usuário ou senha incorretos`;
             }
 
             const data: SignInResponse = await response.json();
 
-            // Aguardar 1 segundo antes de retornar os dados de login
             await new Promise((resolve) => setTimeout(resolve, 1200));
 
-
             if (data && data.body) {
+                await AsyncStorage.setItem("userId", String(data.body.id)); // Ensure id is string
                 return data.body;
             } else {
                 return "Resposta inválida do servidor";
             }
         } catch (error: any) {
-            // Exibir toast de erro genérico
-            showToast(
-                "Ocorreu um erro ao fazer login. Por favor, tente novamente."
-            );
+            showToast("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
             return "Ocorreu um erro ao fazer login. Por favor, tente novamente.";
         }
     },

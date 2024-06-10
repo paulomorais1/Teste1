@@ -62,7 +62,7 @@ const SignUpScreen = () => {
             password: formData.password,
         };
 
-        console.log("Enviando dados para cadastro:", userData);
+       
         const responseMessage = await SignUpService.signUp(userData);
 
         if (typeof responseMessage === "string") {
