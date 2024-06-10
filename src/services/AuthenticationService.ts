@@ -1,55 +1,56 @@
+
+
 import User from "@/models/User";
+import { ToastAndroid } from "react-native";
 
 interface SignInResponse {
     body: User;
     message: string;
+
 }
 
 const AuthenticationService = {
-    login: async (phone: number, password: string): Promise<User | null> => {
+    login: async (phone: number, password: string): Promise<User | string> => {
+        const showToast = (message ) => {
+            ToastAndroid.show(message, ToastAndroid.SHORT);
+        };
         try {
-
-
             const requestOptions: RequestInit = {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ phone, password }),
             };
 
-            // Enviar solicitação de login para o servidor usando fetch
             const response = await fetch(
                 "http://192.168.15.10:8080/api/v1/auth/user/sign-in",
                 requestOptions
             );
 
             if (!response.ok) {
-                // Se a resposta não estiver OK, lança um erro
-                throw new Error(
-                    "Erro ao fazer login. Status: " + response.status
-                );
+                // Exibir toast de erro
+                showToast("Usuário ou senha incorretos");
+                return `Usuário ou senha incorretos`;
             }
 
-            // Converter a resposta para JSON
             const data: SignInResponse = await response.json();
 
+            // Aguardar 1 segundo antes de retornar os dados de login
+            await new Promise((resolve) => setTimeout(resolve, 1200));
 
 
-
-            // Verificar se a resposta contém os dados do usuário
             if (data && data.body) {
                 return data.body;
             } else {
-                console.error("Resposta inválida do servidor");
-                return null;
+                return "Resposta inválida do servidor";
             }
         } catch (error: any) {
-            // Log de erro caso ocorra um erro durante o login
-            console.error("Erro ao fazer login:", error.message);
-
-            // Retornar null em caso de erro
-            return null;
+            // Exibir toast de erro genérico
+            showToast(
+                "Ocorreu um erro ao fazer login. Por favor, tente novamente."
+            );
+            return "Ocorreu um erro ao fazer login. Por favor, tente novamente.";
         }
     },
-};
+}
 
 export default AuthenticationService;

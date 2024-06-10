@@ -30,6 +30,7 @@ const PhoneNumberInput = ({ value, onChangeText }) => {
                 placeholderTextColor="#333333"
                 style={styles.input}
                 keyboardType="phone-pad"
+                maxLength={11}
             />
         </View>
     );

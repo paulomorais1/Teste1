@@ -8,7 +8,11 @@ import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import AdminPainel from "../components/Admin/AdminPainel";
 import PerfilScreen from "./PerfilScreen";
 
+
+
+
 const Tab = createBottomTabNavigator();
+
 
 const AdminScreen = () => {
     return (
@@ -53,6 +57,7 @@ const AdminScreen = () => {
             <Tab.Screen
                 name="Perfil Screen"
                 component={PerfilScreen}
+             
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialIcons
@@ -61,7 +66,7 @@ const AdminScreen = () => {
                             color={color}
                         />
                     ),
-                    headerShown: false 
+                    headerShown: false
                 }}
             />
         </Tab.Navigator>

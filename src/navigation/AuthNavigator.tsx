@@ -14,7 +14,7 @@ const Stack = createStackNavigator();
 
 const AuthNavigator = () => {
     return (
-        <Stack.Navigator initialRouteName="SignIn">
+        <Stack.Navigator initialRouteName="SignUp">
             <Stack.Screen
                 name="PerfilScreen"
                 component={PerfilScreen}
@@ -31,7 +31,21 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: false
+                    headerShown: false,
+                })}
+            />
+            <Stack.Screen
+                name="SignUpScreen"
+                component={SignUpScreen}
+                options={({ navigation }) => ({
+                    title: "",
+                    headerLeft: () => (
+                        <HeaderBackButton
+                            onPress={() => navigation.goBack()}
+                            tintColor="#000" // Cor do ícone
+                        />
+                    ),
+                    headerShown: false,
                 })}
             />
             <Stack.Screen
@@ -45,7 +59,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true
+                    headerShown: true,
                 })}
             />
             <Stack.Screen
@@ -59,7 +73,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true
+                    headerShown: true,
                 })}
             />
             <Stack.Screen
@@ -73,7 +87,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: false
+                    headerShown: false,
                 })}
             />
             <Stack.Screen
@@ -87,7 +101,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true
+                    headerShown: true,
                 })}
             />
             <Stack.Screen
@@ -101,7 +115,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true
+                    headerShown: true,
                 })}
             />
             <Stack.Screen
@@ -115,7 +129,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true
+                    headerShown: true,
                 })}
             />
         </Stack.Navigator>

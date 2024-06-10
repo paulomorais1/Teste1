@@ -33,6 +33,7 @@ const MainNavigator: React.FC = () => {
             />
             <Stack.Screen name="Feedback" component={FeedbackScreen} />
             <Stack.Screen name="PerfilScreen" component={PerfilScreen} />
+            <Stack.Screen name="SignUpScreen" component={SignUpScreen} />
         </Stack.Navigator>
     );
 };

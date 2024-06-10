@@ -1,23 +1,36 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, ScrollView, KeyboardAvoidingView, Platform, StatusBar } from "react-native";
+import {
+    View,
+    Text,
+    TouchableOpacity,
+    StyleSheet,
+    ScrollView,
+    KeyboardAvoidingView,
+    Platform,
+    StatusBar,
+} from "react-native";
 import Avatar from "./Perfil/Avatar";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { AntDesign, MaterialIcons } from '@expo/vector-icons';
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { AntDesign, MaterialIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
 
-const ProfileScreen = () => {
+
+
+const ProfileScreen: React.FC = () => {
     const navigation = useNavigation();
+
     const handleLogout = async () => {
         navigation.navigate("SignIn");
-     };
-  
+    };
+
+
     return (
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
             keyboardVerticalOffset={Platform.OS === "ios" ? 249 : 0} // Ajuste conforme a altura do cabeçalho
         >
-            <View >
+            <View>
                 <ScrollView contentContainerStyle={styles.scrollContainer}>
                     <View style={styles.profileHeader}>
                         <Avatar />
@@ -25,25 +38,42 @@ const ProfileScreen = () => {
                     <View style={styles.profileMenu}>
                         <TouchableOpacity style={styles.menuItem}>
                             <AntDesign name="idcard" size={24} color="black" />
-                            <Text style={styles.menuItemText}>Personal Information</Text>
+                            <Text style={styles.menuItemText}>
+                                Personal Information
+                            </Text>
                             <AntDesign name="right" size={24} color="black" />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.menuItem}>
-                            <MaterialIcons name="security" size={24} color="black" />
-                            <Text style={styles.menuItemText}>Privacy & Security</Text>
+                            <MaterialIcons
+                                name="security"
+                                size={24}
+                                color="black"
+                            />
+                            <Text style={styles.menuItemText}>
+                                Privacy & Security
+                            </Text>
                             <AntDesign name="right" size={24} color="black" />
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.menuItem}>
-                            <MaterialIcons name="support-agent" size={24} color="black" />
+                            <MaterialIcons
+                                name="support-agent"
+                                size={24}
+                                color="black"
+                            />
                             <Text style={styles.menuItemText}>Support</Text>
                             <AntDesign name="right" size={24} color="black" />
                         </TouchableOpacity>
                     </View>
-                    <TouchableOpacity style={styles.logoutButton}
-                       onPress={handleLogout}>
-                        <MaterialCommunityIcons name="logout" size={24} color="white" />
+                    <TouchableOpacity
+                        style={styles.logoutButton}
+                        onPress={handleLogout}
+                    >
+                        <MaterialCommunityIcons
+                            name="logout"
+                            size={24}
+                            color="white"
+                        />
                         <Text style={styles.logoutButtonText}>Logout</Text>
-                        
                     </TouchableOpacity>
                 </ScrollView>
             </View>
@@ -62,7 +92,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     profileHeader: {
-        width: '100%',
+        width: "100%",
         height: 249,
         backgroundColor: "#E0F2DF", // primary-100
         borderRadius: 0,
@@ -70,13 +100,13 @@ const styles = StyleSheet.create({
     },
     profileMenu: {
         marginTop: 20,
-        width: '85%',
+        width: "85%",
         gap: 20,
     },
     menuItem: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center',
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
         paddingVertical: 15,
         paddingHorizontal: 20,
         borderBottomColor: "#ddd",
@@ -88,8 +118,8 @@ const styles = StyleSheet.create({
     },
     logoutButton: {
         marginTop: 20,
-        flexDirection: 'row',
-        alignItems: 'center',
+        flexDirection: "row",
+        alignItems: "center",
         backgroundColor: "#325426",
         paddingHorizontal: 20,
         paddingVertical: 15,

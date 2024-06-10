@@ -64,11 +64,11 @@ const App: React.FC = () => {
 
     console.log("Rendering AuthNavigator...");
     return (
-       
+
             <NavigationContainer>
                 <AuthNavigator />
             </NavigationContainer>
-        
+
     );
 };
 

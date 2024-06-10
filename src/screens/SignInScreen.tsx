@@ -20,6 +20,7 @@ import PasswordInput from "@/components/Input/PasswordInput";
 const SignInScreen = () => {
     const [phone, setPhone] = useState("");
     const [password, setPassword] = useState("");
+
     const navigation = useNavigation();
 
     const showToast = (message) => {
@@ -27,36 +28,39 @@ const SignInScreen = () => {
     };
 
     const handleSignIn = async () => {
-
         if (!phone || !password) {
             showToast("Por favor, preencha todos os campos");
             return;
         }
 
-        try {
-            const user = await AuthenticationService.login(
-                phone as unknown as number,
-                password
-            );
+        const result = await AuthenticationService.login(
+            phone as unknown as number,
+            password
+        );
 
 
-            if (user) {
-                await AsyncStorage.setItem("userRole", user.role);
 
-                // Utilize o papel (role) do usuário retornado para decidir qual tela exibir
-                if (user.role === "Admin") {
-                    navigation.navigate("AdminScreen");
-                } else if (user.role === "Volunteer") {
-                    navigation.navigate("VolunteerScreen");
-                } else {
-                    navigation.navigate("DonationScreen");
-                }
+        if (typeof result === "string") {
+            // Exibir mensagem de erro como toast
+            showToast(result);
+
+        } else {
+            const user = result;
+            setTimeout(() => {
+                showToast(`Logado com sucesso!`);
+            }, 100);
+            setTimeout(() => {
+                showToast(` Bem-vindo, ${user.name} `);
+            }, 2000);
+
+            await AsyncStorage.setItem("userRole", user.role);
+            if (user.role === "Admin") {
+                navigation.navigate("AdminScreen");
+            } else if (user.role === "Volunteer") {
+                navigation.navigate("VolunteerScreen");
             } else {
-                showToast("Credenciais incorretas. Por favor, tente novamente.");
+                navigation.navigate("DonationScreen");
             }
-        } catch (error) {
-            console.error("Erro ao fazer login:", error);
-            showToast("Ocorreu um erro ao fazer login. Por favor, tente novamente.");
         }
     };
 
@@ -64,13 +68,15 @@ const SignInScreen = () => {
         <KeyboardAvoidingView
             behavior={Platform.OS === "ios" ? "padding" : "height"}
             style={styles.container}
-            keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}
+            keyboardVerticalOffset={Platform.OS === "ios" ? 300 : 0}
         >
             <ScrollView contentContainerStyle={styles.scrollContainer}>
                 <View style={styles.innerContainer}>
                     <View style={styles.logoContainer}>
                         <Image
-                            source={require("./logo.png")}
+                            source={{
+                                uri: "https://raw.githubusercontent.com/paulomorais1/Teste1/Teste/assets/logo.png",
+                            }}
                             style={styles.logo}
                             resizeMode="contain"
                         />
@@ -82,6 +88,7 @@ const SignInScreen = () => {
                             <PhoneNumberInput
                                 value={phone}
                                 onChangeText={setPhone}
+                                
                             />
                             <PasswordInput
                                 value={password}
@@ -134,6 +141,7 @@ const styles = StyleSheet.create({
     logoContainer: {
         alignItems: "center",
         justifyContent: "center",
+        paddingVertical: 30,
     },
     logo: {
         width: "50%",
@@ -148,7 +156,7 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         marginBottom: 10,
     },
-  
+
     button: {
         justifyContent: "center",
         alignItems: "center",
@@ -173,7 +181,6 @@ const styles = StyleSheet.create({
         marginTop: 20,
         alignSelf: "center",
     },
-    // Adicione o estilo para o container do PhoneNumberInput
     phoneNumberInputContainer: {
         gap: 20,
     },
