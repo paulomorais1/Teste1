@@ -58,18 +58,16 @@ const styles = StyleSheet.create({
         backgroundColor: "#F5F5F5",
         justifyContent: "center",
         alignItems: "center",
-        paddingHorizontal: 20,
+        paddingHorizontal: 50,
     },
     containerLogo: {
-        marginBottom: 20,
+        marginBottom: 30,
         height: "25%",
     },
     logoImage: {
         width: 200,
         height: 200,
         resizeMode: "contain",
-        borderWidth: 1,
-
         flex: 1,
     },
     containerTitle: {

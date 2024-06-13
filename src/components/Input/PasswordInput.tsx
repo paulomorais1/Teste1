@@ -16,7 +16,7 @@ const PasswordInput = ({ value, onChangeText }) => {
                 placeholder="Digite a senha"
                 placeholderTextColor="#333333"
                 style={styles.input}
-                secureTextEntry={false} // Para ocultar os caracteres da senha
+                secureTextEntry={true} // Para ocultar os caracteres da senha
             />
         </View>
     );

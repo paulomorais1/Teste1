@@ -1,30 +1,19 @@
-import User from "@/models/User";
-import { ToastAndroid } from "react-native";
+// services/UserService.ts
+import User from "@/models/User"; // Ajuste o caminho conforme necessário
 
-const showToast = (message: string) => {
-    ToastAndroid.show(message, ToastAndroid.SHORT);
-};
-
-const UserService = {
-    getAllUsers: async (): Promise<User[] | string> => {
-        try {
-            const response = await fetch("http://192.168.15.10:8080/api/v1/user/get-by-id/", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-            });
-
-            if (!response.ok) {
-                showToast("Erro ao buscar usuários");
-                return "Erro ao buscar usuários";
-            }
-
-            const data: User[] = await response.json();
-            return data;
-        } catch (error: any) {
-            showToast("Ocorreu um erro ao buscar usuários. Por favor, tente novamente.");
-            return "Ocorreu um erro ao buscar usuários. Por favor, tente novamente.";
-        }
+const getAllUsers = async (): Promise<User[] | string> => {
+  try {
+    const response = await fetch("http://192.168.15.10:8080/api/v1/user/get-all");
+    const result = await response.json();
+    if (response.ok) {
+      return result.body as User[]; // Assegure que 'body' contém o array de usuários
+    } else {
+      return "Error fetching users";
     }
+  } catch (error) {
+    console.error("Error fetching users:", error);
+    return "Error fetching users";
+  }
 };
 
-export default UserService;
+export default { getAllUsers };

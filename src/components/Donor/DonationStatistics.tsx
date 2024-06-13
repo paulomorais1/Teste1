@@ -1,14 +1,14 @@
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
-const DonorAliments = ({ data }) => {
+const DonationStatistics = ({ data }) => {
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Doações</Text>
+      <Text style={styles.title}>Estatísticas de Doações</Text>
       {/* {data.map((item, index) => (
-        <View style={styles.donationItem} key={index}>
-          <Text style={styles.donationLabel}>{item.name}</Text>
-          <Text style={styles.donationValue}>{item.value}</Text>
+        <View style={styles.statsItem} key={index}>
+          <Text style={styles.statsLabel}>{item.label}</Text>
+          <Text style={styles.statsValue}>{item.value}</Text>
         </View>
       ))} */}
     </View>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginBottom: 10,
   },
-  donationItem: {
+  statsItem: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
@@ -32,13 +32,13 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
   },
-  donationLabel: {
+  statsLabel: {
     fontSize: 16,
   },
-  donationValue: {
+  statsValue: {
     fontSize: 16,
     fontWeight: 'bold',
   },
 });
 
-export default DonorAliments;
+export default DonationStatistics;

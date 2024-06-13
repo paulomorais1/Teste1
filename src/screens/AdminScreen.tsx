@@ -1,12 +1,9 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import BeneficiaryManagement from "../components/Admin/BeneficiaryManagement";
-import DonorManagement from "../components/Admin/DonorManagement";
 
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import AdminPainel from "../components/Admin/AdminPainel";
 import PerfilScreen from "./PerfilScreen";
+import ListUsers from "../components/Admin/ListUsers";
 
 
 
@@ -23,18 +20,10 @@ const AdminScreen = () => {
                 tabBarInactiveTintColor: "#325426",
             }}
         >
+
             <Tab.Screen
-                name="Painel Management"
-                component={AdminPainel}
-                options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <MaterialIcons name="home" size={size} color={color} />
-                    ),
-                }}
-            />
-            <Tab.Screen
-                name="Beneficiary Management"
-                component={BeneficiaryManagement}
+                name="Lista de usuários"
+                component={ListUsers}
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialIcons
@@ -45,19 +34,11 @@ const AdminScreen = () => {
                     ),
                 }}
             />
-            <Tab.Screen
-                name="Donor Management"
-                component={DonorManagement}
-                options={{
-                    tabBarIcon: ({ color, size }) => (
-                        <FontAwesome5 name="donate" size={size} color={color} />
-                    ),
-                }}
-            />
+
             <Tab.Screen
                 name="Perfil Screen"
                 component={PerfilScreen}
-             
+
                 options={{
                     tabBarIcon: ({ color, size }) => (
                         <MaterialIcons

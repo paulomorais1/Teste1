@@ -62,7 +62,7 @@ const SignUpScreen = () => {
             password: formData.password,
         };
 
-       
+
         const responseMessage = await SignUpService.signUp(userData);
 
         if (typeof responseMessage === "string") {

@@ -1,8 +1,10 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import DonorAliments from "@/components/Donor/DonorAliments";
+import DonationTypes from "@/components/Donor/DonationTypes";
+import DonationStatistics from "@/components/Donor/DonationStatistics";
 
-import DonorAliments from "../components/Donor/DonorAliments";
-import DonorGeneric from "@/components/Donor/DonorGeneric";
+
 
 const Tab = createBottomTabNavigator();
 
@@ -10,7 +12,8 @@ const DonationScreen = () => {
     return (
         <Tab.Navigator>
             <Tab.Screen name="DonorAliments" component={DonorAliments} />
-            <Tab.Screen name="DonorGeneric" component={DonorGeneric} />
+            <Tab.Screen name="DonationTypes" component={DonationTypes} />
+            <Tab.Screen name="DonationStatistics" component={DonationStatistics} />
         </Tab.Navigator>
     );
 };

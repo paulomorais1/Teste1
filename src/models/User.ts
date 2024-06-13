@@ -1,7 +1,7 @@
 import { IAddress } from "./address";
 import { TRole } from "./role";
 interface UserBody {
-    id: number;
+    id: string;
     name: string;
     surname: string;
     phone: string; // ou number, dependendo do tipo real dos dados
@@ -9,9 +9,12 @@ interface UserBody {
     role: TRole;
     email?: string;
     address?: IAddress;
+    avatar:string;
+
 }
 
 interface User {
+
     body: UserBody;
 }
 

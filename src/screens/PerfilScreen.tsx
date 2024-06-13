@@ -15,6 +15,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import GetUserService from "@/services/GetUserById";
 import User from "@/models/User";
 import { AntDesign, MaterialIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 
 
@@ -23,9 +24,10 @@ const ProfileScreen: React.FC = () => {
     const [error, setError] = useState<string | null>(null);
     const [userDataLoaded, setUserDataLoaded] = useState<boolean>(false);
     const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
+    const navigation = useNavigation();
 
     const handleLogout = async () => {
-        // Aqui você pode adicionar a lógica para logout
+        navigation.navigate("SignIn");
     };
 
     useEffect(() => {
@@ -40,7 +42,7 @@ const ProfileScreen: React.FC = () => {
                 }
 
                 const userData = await GetUserService.getUserById(userId);
-                console.log("User Data:", userData);
+
 
                 if (typeof userData === "string") {
                     setError(userData); // Define o erro com a mensagem retornada
@@ -52,7 +54,6 @@ const ProfileScreen: React.FC = () => {
                 setUserDataLoaded(true); // Define que os dados do usuário foram carregados com sucesso
                 setLoading(false);
             } catch (error) {
-                console.error("Erro ao recuperar dados do usuário:", error);
                 setError("Erro ao recuperar dados do usuário.");
                 setLoading(false);
             }
@@ -61,12 +62,7 @@ const ProfileScreen: React.FC = () => {
         fetchUserData();
     }, []);
 
-    useEffect(() => {
-        console.log("userDataLoaded:", userDataLoaded); // Adiciona um log para verificar o valor de userDataLoaded
-        if (loggedInUser) {
-            console.log("Dados do usuário atualizados:", loggedInUser);
-        }
-    }, [loggedInUser, userDataLoaded]);
+
 
     return (
         <KeyboardAvoidingView

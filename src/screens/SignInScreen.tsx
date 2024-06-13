@@ -108,7 +108,7 @@ const SignInScreen = () => {
                             <Text style={styles.buttonText}>Entrar</Text>
                         </TouchableOpacity>
                         <Text style={styles.signUpText}>
-                            Seja um doador{" "}
+                            Faça a sua parte{" "}
                             <Text
                                 style={styles.link}
                                 onPress={() => navigation.navigate("SignUp")}
