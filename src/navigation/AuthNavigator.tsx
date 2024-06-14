@@ -59,7 +59,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true,
+                    headerShown: false,
                 })}
             />
             <Stack.Screen
@@ -73,7 +73,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true,
+                    headerShown: false,
                 })}
             />
             <Stack.Screen
@@ -101,7 +101,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true,
+                    headerShown: false,
                 })}
             />
             <Stack.Screen
@@ -115,7 +115,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true,
+                    headerShown: false,
                 })}
             />
             <Stack.Screen
@@ -129,7 +129,7 @@ const AuthNavigator = () => {
                             tintColor="#000" // Cor do ícone
                         />
                     ),
-                    headerShown: true,
+                    headerShown: false,
                 })}
             />
         </Stack.Navigator>

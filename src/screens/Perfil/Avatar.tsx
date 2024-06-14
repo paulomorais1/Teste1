@@ -27,8 +27,10 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
+       marginTop:80
     },
     avatar: {
+
         width: 92,
         height: 92,
         backgroundColor: "#D9CBF6FF",
@@ -36,9 +38,9 @@ const styles = StyleSheet.create({
         borderRadius: 41,
         borderWidth: 1.5,
         borderColor: "#000000FF",
-
         justifyContent: "center", // Centraliza a imagem dentro do avatar
         alignItems: "center",
+
     },
     avatarImage: {
         width: 92,

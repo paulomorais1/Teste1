@@ -1,10 +1,10 @@
 import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import PerfilScreen from "./PerfilScreen";
 import ListUsers from "../components/Admin/ListUsers";
 
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
 
 
@@ -32,6 +32,8 @@ const AdminScreen = () => {
                             color={color}
                         />
                     ),
+                    headerShown: false
+
                 }}
             />
 

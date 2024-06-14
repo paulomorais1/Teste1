@@ -176,19 +176,22 @@ const styles = StyleSheet.create({
     },
     profileHeader: {
         width: "100%",
-        height: 229,
+        height: 269,
         backgroundColor: "#E0F2DF",
         borderRadius: 0,
         alignItems: "center",
     },
     profileInfo: {
+        flex:1,
         textAlign: "center",
-
-        paddingHorizontal: 20,
+        alignSelf:"center",
+       marginTop:10
     },
     profileInfoText: {
         fontSize: 16,
-        marginBottom: 10,
+        textAlign: "center",
+        marginTop:5
+
     },
     profileMenu: {
         marginTop: 20,

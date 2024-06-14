@@ -1,21 +1,60 @@
 import React from "react";
+
+import PerfilScreen from "./PerfilScreen";
+
+
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import DonorAliments from "@/components/Donor/DonorAliments";
-import DonationTypes from "@/components/Donor/DonationTypes";
-import DonationStatistics from "@/components/Donor/DonationStatistics";
 
 
 
 const Tab = createBottomTabNavigator();
 
-const DonationScreen = () => {
+
+const DonnorScreen = () => {
     return (
-        <Tab.Navigator>
-            <Tab.Screen name="DonorAliments" component={DonorAliments} />
-            <Tab.Screen name="DonationTypes" component={DonationTypes} />
-            <Tab.Screen name="DonationStatistics" component={DonationStatistics} />
+        <Tab.Navigator
+            screenOptions={{
+                tabBarShowLabel: false,
+                tabBarActiveTintColor: "black",
+                tabBarInactiveTintColor: "#325426",
+            }}
+        >
+
+            <Tab.Screen
+                name="Doação de alimentos"
+                component={DonorAliments}
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialCommunityIcons
+                            name="cart-heart"
+                            size={size}
+                            color={color}
+                        />
+                    ),
+                    headerShown: false
+                }}
+            />
+
+            <Tab.Screen
+                name="Perfil Screen"
+                component={PerfilScreen}
+
+                options={{
+                    tabBarIcon: ({ color, size }) => (
+                        <MaterialIcons
+                            name="settings"
+                            size={size}
+                            color={color}
+                        />
+                    ),
+                    headerShown: false
+                }}
+            />
         </Tab.Navigator>
     );
 };
 
-export default DonationScreen;
+export default DonnorScreen;
