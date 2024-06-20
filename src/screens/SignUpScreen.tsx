@@ -33,10 +33,10 @@ const SignUpScreen = () => {
 
     const radioButtons = useMemo(
         () => [
-            {
-                label: "Ser um Voluntário",
-                value: "Volunteer" as TRole,
-            },
+            // {
+            //     label: "Ser um Voluntário",
+            //     value: "Volunteer" as TRole,
+            // },
             {
                 label: "Ser um Doador",
                 value: "Donation" as TRole,
@@ -235,18 +235,20 @@ const styles = StyleSheet.create({
         color: "green",
     },
     radioContainer: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        width: "100%",
+        // flexDirection: "row",
+        // justifyContent: "space-between",
+        width: "60%",
     },
     radioButton: {
         borderWidth: 1,
         borderColor: "#E0F2DF",
         borderRadius: 5,
         padding: 10,
+
     },
     radioText: {
         color: "#000",
+        textAlign:'center'
     },
     selectedRadioButton: {
         backgroundColor: "#325426", // Selected background color
